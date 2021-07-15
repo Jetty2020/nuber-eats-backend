@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as jwt from 'jsonwebtoken';
 import { JwtService } from 'src/jwt/jwt.service';
 import { Repository } from 'typeorm';
 import { CreateAccountInput } from './dtos/create-account.dto';
