@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from 'src/jwt/jwt.service';
+import { MailService } from 'src/mail/mail.service';
 import { Repository } from 'typeorm';
 import {
   CreateAccountInput,
@@ -20,6 +21,7 @@ export class UserService {
     private readonly jwtService: JwtService,
     @InjectRepository(Verification)
     private readonly verifications: Repository<Verification>,
+    private readonly mailService: MailService,
   ) {}
 
   async createAccount({
@@ -35,11 +37,12 @@ export class UserService {
       const user = await this.users.save(
         this.users.create({ email, password, role }),
       );
-      await this.verifications.save(
+      const verification = await this.verifications.save(
         this.verifications.create({
           user,
         }),
       );
+      this.mailService.sendVerificationEmail(user.email, verification.code);
       return { ok: true };
     } catch (e) {
       return { ok: false, error: "Couldn't create account" };
@@ -65,6 +68,7 @@ export class UserService {
           error: 'Wrong password',
         };
       }
+
       const token = this.jwtService.sign(user.id);
       return {
         ok: true,
@@ -98,10 +102,21 @@ export class UserService {
   ): Promise<EditProfileOutput> {
     try {
       const user = await this.users.findOne(userId);
+      const veri = await this.verifications.findOne(
+        { user: { id: userId } },
+        {
+          relations: ['user'],
+        },
+      );
+      if (veri) await this.verifications.delete(veri.id);
       if (email) {
         user.email = email;
         user.verified = false;
         await this.verifications.save(this.verifications.create({ user }));
+        // const verification = await this.verifications.save(
+        //   this.verifications.create({ user }),
+        // );
+        // this.mailService.sendVerificationEmail(user.email, verification.code);
       }
       if (password) {
         user.password = password;
