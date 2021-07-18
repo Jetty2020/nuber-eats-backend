@@ -15,9 +15,11 @@ export class MailService {
   private async sendEmail(subject: string, content: string) {
     const form = new FormData();
     form.append('from', `Excited User <mailgun@${this.options.domain}>`);
-    form.append('to', `kmclo2018@gmail.com`);
+    form.append('to', `kmclo@naver.com`);
     form.append('subject', subject);
-    form.append('text', content);
+    form.append('template', 'verify-email');
+    form.append('v:code', 'asdfasdf');
+    form.append('v:username', 'dadu!!!');
     const response = await got(
       `https://api.mailgun.net/v3/${this.options.domain}/messages`,
       {
