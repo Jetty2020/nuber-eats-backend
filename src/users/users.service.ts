@@ -100,16 +100,10 @@ export class UserService {
   ): Promise<EditProfileOutput> {
     try {
       const user = await this.users.findOne(userId);
-      const veri = await this.verifications.findOne(
-        { user: { id: userId } },
-        {
-          relations: ['user'],
-        },
-      );
-      if (veri) await this.verifications.delete(veri.id);
       if (email) {
         user.email = email;
         user.verified = false;
+        await this.verifications.delete({ user: { id: user.id } });
         await this.verifications.save(this.verifications.create({ user }));
         // const verification = await this.verifications.save(
         //   this.verifications.create({ user }),
