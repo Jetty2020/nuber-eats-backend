@@ -34,6 +34,7 @@ The Backend of Nuber Eats Clones
 * See Restaurants by Category (pagination)
 * See Restaurants (pagination)
 * See Restaurant
+* Search Restaurant
 - Edit Restaurant
 - Delete Restaurant
 - Create Dish
