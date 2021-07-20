@@ -2,7 +2,8 @@
 
 The Backend of Nuber Eats Clones
 
-># User
+> # User
+
 ## User Model
 
 - id
@@ -20,7 +21,8 @@ The Backend of Nuber Eats Clones
 - Edit Profile
 - Verify Email
 
-># Restaurant
+> # Restaurant
+
 ## Restaurant Model
 
 - name
@@ -30,13 +32,18 @@ The Backend of Nuber Eats Clones
 
 ## Restaurant CRUD
 
-* See Categories
-* See Restaurants by Category (pagination)
-* See Restaurants (pagination)
-* See Restaurant
-* Search Restaurant
-- Edit Restaurant
-- Delete Restaurant
-- Create Dish
-- Edit Dish
-- Delete Dish
+- See Categories
+- See Restaurants by Category (pagination)
+- See Restaurants (pagination)
+- See Restaurant
+- Search Restaurant
+
+* Edit Restaurant
+* Delete Restaurant
+* Create Dish
+* Edit Dish
+* Delete Dish
+
+- Orders CRUD
+- Orders Subscription (Owner, Customer, Delivery)
+- Payments (CRON)
