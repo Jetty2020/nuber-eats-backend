@@ -30,10 +30,10 @@ The Backend of Nuber Eats Clones
 
 ## Restaurant CRUD
 
-- See Categories
-- See Restaurants by Category (pagination)
-- See Restaurants (pagination)
-- See Restaurant
+* See Categories
+* See Restaurants by Category (pagination)
+* See Restaurants (pagination)
+* See Restaurant
 - Edit Restaurant
 - Delete Restaurant
 - Create Dish
