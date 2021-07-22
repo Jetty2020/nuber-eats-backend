@@ -45,5 +45,9 @@ The Backend of Nuber Eats Clones
 * Delete Dish
 
 - Orders CRUD
-- Orders Subscription (Owner, Customer, Delivery)
-- Payments (CRON)
+- Orders Subscription:
+  - Pending Orders (Owner) (T: createOrder)
+  - Order Status (Customer, Delivery, Owner) (T: editOrder)
+  - Pending Pickup Order (Delivery)
+
+* Payments (CRON)
