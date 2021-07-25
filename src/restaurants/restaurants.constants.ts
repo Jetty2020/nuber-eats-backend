@@ -1,1 +1,1 @@
-export const CONFIG_PAGES = 5;
+export const CONFIG_PAGES = 3;
