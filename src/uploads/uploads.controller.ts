@@ -4,6 +4,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { FileInterceptor } from '@nestjs/platform-express';
 import * as AWS from 'aws-sdk';
 
@@ -11,13 +12,14 @@ const BUCKET_NAME = 'nomad-coder-nubereats888'; // 버켓이름이 중복될 시
 
 @Controller('uploads')
 export class UploadsController {
+  constructor(private readonly configService: ConfigService) {}
   @Post('')
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(@UploadedFile() file) {
     AWS.config.update({
       credentials: {
-        accessKeyId: process.env.AMZON_ACCESS_KEY,
-        secretAccessKey: process.env.AMZON_SECRET_KEY,
+        accessKeyId: this.configService.get('AWS_KEY'),
+        secretAccessKey: this.configService.get('AWS_SECRET'),
       },
     });
     try {
